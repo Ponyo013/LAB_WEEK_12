@@ -31,10 +31,13 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
             movieRepository.fetchMovies().catch {
                 // catch is a terminal operator that catches exceptions from the Flow
                 _error.value = "An exception occurred: ${it.message}"
-            }.collect {
+            }.collect { movies ->
+                // Sorted by popularity (descending)
+                val sorted = movies.sortedBy { it.popularity }
+
                 // collect is a terminal operator that collects the values from the Flow
                 // the results are emitted to the StateFlow
-                _popularMovies.value = it
+                _popularMovies.value = sorted
             }
         }
     }

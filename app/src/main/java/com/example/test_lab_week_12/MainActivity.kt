@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
     }
 
     private fun openMovieDetails(movie: Movie) {
